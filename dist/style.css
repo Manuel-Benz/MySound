@@ -16,3 +16,6 @@
 
 .partials-toggle{margin-top:24px;width:100%;text-align:left}.partials-toggle::after{content:' +';float:right}.partials-toggle[aria-expanded=true]::after{content:' −'}.discover-explanation{font-size:.875rem;color:var(--muted);margin:0 0 12px!important}
 @media(max-width:720px){.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%;top:calc(100% + 8px)}}
+
+/* Keep the status outside the card grid so both columns share a top edge. */
+.analysis-state{margin:0 0 12px;padding:0}.workspace>.controls-panel,.visuals{align-self:start}.chart-panel .panel-heading,#synthControls>.panel-heading{min-height:42px}.visuals{gap:18px}
