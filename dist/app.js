@@ -3,7 +3,7 @@ import {messages,experiments} from './i18n.js';
 const $=id=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
 let preferences=read('klang-preferences',{}),lang=preferences.lang==='en'?'en':'de';
-let sound={fundamental:220,harmonic:true,preset:'saw',partials:makePartials(9,'saw',220)};
+let sound={fundamental:220,harmonic:true,preset:'sine',partials:makePartials(9,'sine',220)};
 let discoverPartials=false;
 let mode=preferences.mode==='advanced'?'advanced':'discover';
 let source='synth',playing=false,frozen=false,comparison=null,ab={},experiment=null,stage='predict',saved=read('klang-sounds',[]);
