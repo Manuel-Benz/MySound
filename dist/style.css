@@ -19,3 +19,12 @@
 
 /* Keep the status outside the card grid so both columns share a top edge. */
 .analysis-state{margin:0 0 12px;padding:0}.workspace>.controls-panel,.visuals{align-self:start}.chart-panel .panel-heading,#synthControls>.panel-heading{min-height:42px}.visuals{gap:18px}
+
+/* Share the first grid row so adjacent cards have identical outer heights. */
+@media(min-width:721px){
+ .workspace:has(.visuals:not(.prediction)){align-items:stretch}
+ .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
+ .visuals:not(.prediction){display:contents}
+ .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
+ .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
+}
