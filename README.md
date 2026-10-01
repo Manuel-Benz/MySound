@@ -13,6 +13,10 @@ npm start
 
 Open http://127.0.0.1:4173. AudioWorklet and microphone capture require HTTPS or localhost; opening index.html directly does not suffice.
 
+## Interface modes
+
+Discover is the default on a new browser. Advanced reveals the existing detailed controls without changing sound settings. Mode preference is saved locally. Experiments reveal task-specific controls in Discover: two frequencies for beats, phases and A/B for the phase experiment, fundamental mute for the missing fundamental, partial count for square-wave synthesis, and spectrum comparison/spectrogram for vowels. Complex shared or saved sounds automatically open Advanced outside a guided experiment. Playback is above the working surface; save/load/share/export live in Sound & sharing.
+
 ## Included
 
 - Additive synthesizer with 9, 16 or 32 sine partials, sine/triangle/sawtooth/square presets, individual amplitude, phase, free/harmonic frequencies, mute and solo.
