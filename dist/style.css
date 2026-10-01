@@ -13,3 +13,6 @@
 [data-guided=missing] #partialTable tr:nth-child(n+2),[data-guided=missing] #advanced th:nth-child(2),[data-guided=missing] #advanced td:nth-child(2),[data-guided=missing] #advanced th:nth-child(3),[data-guided=missing] #advanced td:nth-child(3),[data-guided=missing] #advanced th:nth-child(4),[data-guided=missing] #advanced td:nth-child(4),[data-guided=missing] #advanced th:nth-child(6),[data-guided=missing] #advanced td:nth-child(6){display:none}
 [data-guided=beats] #advanced input[type=number]{font-size:1.6rem;padding:12px}[data-guided=beats] #advanced th{font-size:.9rem}
 @media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.actions-content{right:auto;left:0}.heading{padding:20px 0 18px}.source-tabs{padding-bottom:14px}}
+
+.partials-toggle{margin-top:24px;width:100%;text-align:left}.partials-toggle::after{content:' +';float:right}.partials-toggle[aria-expanded=true]::after{content:' −'}.discover-explanation{font-size:.875rem;color:var(--muted);margin:0 0 12px!important}
+@media(max-width:720px){.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%;top:calc(100% + 8px)}}
