@@ -22,9 +22,9 @@
 
 /* Share the first grid row so adjacent cards have identical outer heights. */
 @media(min-width:721px){
- .workspace:has(.visuals:not(.prediction)){align-items:stretch}
- .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
- .visuals:not(.prediction){display:contents}
- .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
- .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
+ [data-mode=discover] .workspace:has(.visuals:not(.prediction)){align-items:stretch}
+ [data-mode=discover] .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
+ [data-mode=discover] .visuals:not(.prediction){display:contents}
+ [data-mode=discover] .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
+ [data-mode=discover] .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
 }
