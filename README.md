@@ -7,7 +7,7 @@ Bilingual educational sound laboratory. Warm Precision Instrument design; all au
 Requires Python 3 (for the local server only). No packages or build needed.
 
 ```sh
-cd /Users/manuelbenz/Desktop/MySound_Code/klanglabor
+cd /Users/manuelbenz/MySound_Code
 npm start
 ```
 
