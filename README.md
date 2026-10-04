@@ -40,7 +40,7 @@ FFT values use Web Audio's 1/N magnitude convention and Blackman window. This af
 npm test
 ```
 
-Node's built-in test runner checks spectral peak position, normalization, presets, mute/solo, Nyquist exclusion, beats, shared-input bounds, PCM WAV output and worklet phase relationships.
+Node's built-in test runner checks spectral peak position, normalization, presets, mute/solo, Nyquist exclusion, beats, shared-input bounds and defaults, the dB rule of the partial bars, PCM WAV output, worklet phase relationships, matching DE/EN message tables, and two regressions (blind-test CSS, old service-worker caches). The Pages workflow runs the tests before every deploy.
 
 ## Source
 
