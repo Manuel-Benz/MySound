@@ -1,6 +1,6 @@
 # Klanglabor / Sound Lab
 
-Bilingual educational sound laboratory. Warm Precision Instrument design; all audio stays in the browser.
+Bilingual educational sound laboratory in the My design system (MySound: scheme The Life Aquatic, accent Tiefsee, whale icon); all audio stays in the browser.
 
 ## Run locally
 
@@ -24,8 +24,10 @@ Discover is the default on a new browser. Advanced reveals the existing detailed
 - Time waveform, Blackman-windowed FFT (2048–32768), logarithmic/linear frequency axis, peak/cursor readout, adjustable smoothing, freeze, stored spectrum overlay, spectrogram.
 - Microphone input without speaker monitoring, local audio-file decoding/playback/seek/loop.
 - Five bilingual experiments: beats, square-wave synthesis, missing fundamental, phase, vowels. Predict/explore/explain stages.
-- A/B sound comparison, local saved presets, hash-based sharing, 3-second PCM WAV export.
-- Saved DE/EN preference, light/dark appearance, projector mode, responsive layout, offline service worker and web app manifest.
+- A/B sound comparison with a blind test (random A or B, charts hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
+- Tap a peak in the spectrum to solo that partial (synthesizer); spectrogram export as PNG.
+- Projector stage (always dark, large charts, playback bar fixed at the bottom); on phones the playback bar is fixed at the bottom too. The heading shrinks after the first visit.
+- Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, projector mode, responsive layout, offline service worker and web app manifest.
 - Optional browser WebMCP read/configure tools (never start sound or recording).
 
 ## Measurement conventions
@@ -43,5 +45,7 @@ Node's built-in test runner checks spectral peak position, normalization, preset
 ## Source
 
 `dist/` contains the editable, deployable source. `app.js` owns interface and Web Audio routing; `dsp.js` holds pure signal utilities; `synth-worklet.js` synthesizes audio; `i18n.js` contains both languages and experiments. No build process, analytics, external fonts or third-party runtime dependencies.
+
+`dist/design/` is a copy from `~/MySuite` (tokens, schemes, icons, DESIGN.md). Never edit it here; change it in MySuite and run `~/MySuite/sync.sh sound`. `style.css` only maps app roles onto the tokens. Deviation: `app.js` picks `--akzent-ink` by contrast, because `my-schemen.css` fixes it per scheme (Zissou: dark ink for yellow) even when `data-ton` selects a dark tone.
 
 The original Synthesizer.jar in the parent directory is preserved. Inspired by Martin Lieberherr's educational Synthesizer (2011); this is an independent implementation with no copied Java code.
