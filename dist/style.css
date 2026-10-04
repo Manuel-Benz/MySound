@@ -1,4 +1,4 @@
-/* Klanglabor – Grundwerte aus dem My-Designsystem (design/css, Kopie aus ~/MySuite – dort ändern):
+/* MySound – Grundwerte aus dem My-Designsystem (design/css, Kopie aus ~/MySuite – dort ändern):
    Neutraltöne, Radien, Schrift, --akzent je Schema. Hier nur Ableitungen und App-Rollen, keine festen
    Farbwerte, damit Hell/Dunkel und die Schema-Wahl in den Einstellungen überall greifen. */
 html{color-scheme:light dark}
@@ -49,11 +49,10 @@ small,.hint{font-size:.85rem;color:var(--text-2);line-height:1.55}
 .topbar-inner{max-width:1480px;margin:auto;padding:10px 36px;display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
 .brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:#FFFFFF;font-weight:700;font-size:1.05rem;letter-spacing:-.02em}
 .brandmark{display:block;width:24px;height:24px;border-radius:var(--radius-s)}
-.brand-sub{font-weight:400;font-size:.85rem;color:#D8D8DC;margin-left:12px;letter-spacing:0}
 .top-actions{display:flex;gap:4px;flex-wrap:wrap}
 .top-actions>button,.actions-menu>summary{color:#D8D8DC;background:transparent;border:0;border-radius:var(--radius);min-height:38px;padding:.45rem .85rem;font-size:.95rem;cursor:pointer}
 .top-actions>button:hover:not(:disabled),.actions-menu>summary:hover{background:rgba(255,255,255,.08);color:#FFFFFF}
-.top-actions>button.active,.actions-menu[open]>summary{background:var(--leiste-aktiv);color:#FFFFFF}
+.top-actions>button.active,.actions-menu>summary.active,.actions-menu[open]>summary{background:var(--leiste-aktiv);color:#FFFFFF}
 .actions-menu{position:relative;margin:0;padding:0;border:0}
 .actions-menu>summary{list-style:none;margin:0;display:flex;align-items:center;font-weight:400}
 .actions-menu>summary::-webkit-details-marker{display:none}
@@ -65,11 +64,8 @@ small,.hint{font-size:.85rem;color:var(--text-2);line-height:1.55}
 .actions-content>#shareBtn{margin-top:2px;border-top:1px solid var(--linie);border-radius:0 0 var(--radius) var(--radius)}
 
 .app{max-width:1480px;margin:auto;padding:0 36px}
-.heading{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0 22px}
-.eyebrow{font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--akzent-text);margin-bottom:8px}
-.local-note{font-size:.85rem;color:var(--text-3)}
-.source-tabs{display:flex;gap:4px;padding-bottom:18px;flex-wrap:wrap}
-.source-tabs button{border-color:transparent}
+.source-tabs{display:flex;gap:3px;flex-wrap:wrap;border:1px solid var(--linie);padding:3px;border-radius:var(--radius-l)}
+.source-tabs button{border-color:transparent;font-size:.9rem}
 .workspace{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.4fr);gap:18px;align-items:start}
 .panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;min-width:0}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}
@@ -169,11 +165,8 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .experiment .answer{border-top:1px solid var(--linie);padding-top:12px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 [hidden]{display:none!important}
-.projector{font-size:20px}
-.projector .app,.projector .topbar-inner{max-width:1800px}
-.projector .chart-panel canvas{height:240px}
-@media(max-width:1000px){.app{padding:0 22px}.topbar-inner{padding:10px 22px}.workspace{grid-template-columns:minmax(270px,.85fr) minmax(0,1.2fr)}.analyser-options{flex-wrap:wrap;gap:10px}.local-note,.brand-sub{display:none}.panel{padding:17px}.chart-bottom output{font-size:.75rem}}
-@media(max-width:720px){.app{padding:0 16px}.topbar-inner{padding:8px 16px}.workspace{grid-template-columns:1fr}h1{font-size:2rem}.heading{padding-top:22px}.chart-panel canvas{height:190px}.page-footer{flex-wrap:wrap}.experiment{padding:16px}.projector .app{padding:0 12px}.projector .workspace{grid-template-columns:1fr}}
+@media(max-width:1000px){.app{padding:0 22px}.topbar-inner{padding:10px 22px}.workspace{grid-template-columns:minmax(270px,.85fr) minmax(0,1.2fr)}.analyser-options{flex-wrap:wrap;gap:10px}.panel{padding:17px}.chart-bottom output{font-size:.75rem}}
+@media(max-width:720px){.app{padding:0 16px}.topbar-inner{padding:8px 16px}.workspace{grid-template-columns:1fr}h1{font-size:2rem}.chart-panel canvas{height:190px}.page-footer{flex-wrap:wrap}.experiment{padding:16px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Vorhersage: Diagramme verdeckt, mit dem Wal als Leerzustand. */
@@ -187,10 +180,9 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .analysis-state[data-state=frozen]{color:var(--blau);background:var(--info-weich)}
 
 /* Discover keeps the same sound state while progressively revealing controls. */
-.mode-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 12px}
+.mode-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:24px 0 16px}
 .mode-switch{display:flex;gap:3px;border:1px solid var(--linie);padding:3px;border-radius:var(--radius-l)}
 .mode-switch button{border-color:transparent;font-size:.9rem}
-.mode-row .hint{margin:0}
 .analysis-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 0}
 .partial-heading select[hidden]{display:none}
 [data-mode=discover] .finite-note{display:none}
@@ -201,7 +193,7 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 [data-guided=phase] #advanced th:nth-child(2),[data-guided=phase] #advanced td:nth-child(2),[data-guided=phase] #advanced th:nth-child(3),[data-guided=phase] #advanced td:nth-child(3),[data-guided=phase] #advanced th:nth-child(n+5),[data-guided=phase] #advanced td:nth-child(n+5){display:none}
 [data-guided=missing] #partialTable tr:nth-child(n+2),[data-guided=missing] #advanced th:nth-child(2),[data-guided=missing] #advanced td:nth-child(2),[data-guided=missing] #advanced th:nth-child(3),[data-guided=missing] #advanced td:nth-child(3),[data-guided=missing] #advanced th:nth-child(4),[data-guided=missing] #advanced td:nth-child(4),[data-guided=missing] #advanced th:nth-child(6),[data-guided=missing] #advanced td:nth-child(6){display:none}
 [data-guided=beats] #advanced input[type=number]{font-size:1.6rem;padding:12px}[data-guided=beats] #advanced th{font-size:.9rem}
-@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.heading{padding:20px 0 18px}.source-tabs{padding-bottom:14px}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
+@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
 
 .partials-toggle{margin-top:24px;width:100%;text-align:left}
 .partials-toggle::after{content:' +';float:right}
@@ -241,7 +233,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .mode-row,.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .mode-switch,.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}
@@ -250,21 +242,9 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .blind-panel .hint{margin:4px 0 0}
 
 /* Kopf nach dem ersten Besuch kleiner. */
-.returning .heading{padding:18px 0 14px}
-.returning .eyebrow{display:none}
-.returning h1{font-size:1.6rem}
-
-/* Beamer-Bühne: grosse Diagramme, Wiedergabe unten fest. */
-.projector .heading,.projector .page-footer,.projector .mode-row .hint,.projector .discover-explanation{display:none}
-.projector .app{padding-top:16px;padding-bottom:110px}
-.projector .workspace{grid-template-columns:minmax(300px,.55fr) minmax(0,1.7fr)}
-.projector .chart-panel canvas{height:clamp(220px,30dvh,460px)}
-.projector .transport{position:fixed;left:0;right:0;bottom:0;z-index:25;margin:0;padding:12px max(36px,calc((100vw - 1800px)/2));background:var(--karte);border-top:1px solid var(--linie);border-bottom:0}
-.top-actions>button[aria-pressed=true]{background:var(--leiste-aktiv);color:#FFFFFF;font-weight:400}
-
 /* Handy: Wiedergabe als feste Leiste am unteren Rand. */
 @media(max-width:720px){
- #projectorBtn{display:none}
+ 
  .transport{position:fixed;left:0;right:0;bottom:0;z-index:25;margin:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--karte);border-top:1px solid var(--linie);border-bottom:0;gap:10px;flex-wrap:nowrap}
  .app{padding-bottom:96px}
  .transport .volume{flex:1;flex-wrap:nowrap;min-width:0}
@@ -275,3 +255,9 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
  .experiment .steps button{flex-direction:column;align-items:flex-start;gap:4px;font-size:.85rem;padding:4px 0}
  .steps li+li::before{top:18px;left:-6px;width:calc(100% - 26px)}
 }
+
+/* Breite Dropdowns: Experimente und Einstellungen. */
+.actions-content.menu-wide{width:360px;max-height:calc(100dvh - 90px);overflow:auto;padding:12px}
+.settings-content{width:420px;padding:4px 18px 14px}
+.settings-content .stack{margin:14px 0}
+.settings-content .hint{margin:14px 0 0}

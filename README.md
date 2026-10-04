@@ -1,4 +1,4 @@
-# Klanglabor / Sound Lab
+# MySound
 
 Bilingual educational sound laboratory in the My design system (MySound: scheme The Life Aquatic, accent Tiefsee, whale icon); all audio stays in the browser.
 
@@ -15,7 +15,7 @@ Open http://127.0.0.1:4173. AudioWorklet and microphone capture require HTTPS or
 
 ## Interface modes
 
-Discover is the default on a new browser. Advanced reveals the existing detailed controls without changing sound settings. Mode preference is saved locally. Experiments reveal task-specific controls in Discover: two frequencies for beats, phases and A/B for the phase experiment, fundamental mute for the missing fundamental, partial count for square-wave synthesis, and spectrum comparison/spectrogram for vowels. Complex shared or saved sounds automatically open Advanced outside a guided experiment. Playback is above the working surface; save/load/share/export live in Sound & sharing.
+Discover is the default on a new browser. Advanced reveals the existing detailed controls without changing sound settings. Mode preference is saved locally. Experiments reveal task-specific controls in Discover: two frequencies for beats, phases and A/B for the phase experiment, fundamental mute for the missing fundamental, partial count for square-wave synthesis, and spectrum comparison/spectrogram for vowels. Complex shared or saved sounds automatically open Advanced outside a guided experiment. Playback is above the working surface. The top bar holds three dropdowns: Experiments, Sound & sharing (save/load/share/export) and Settings; only one is open at a time. Audio source and mode share one row of segmented switches.
 
 ## Included
 
@@ -26,8 +26,8 @@ Discover is the default on a new browser. Advanced reveals the existing detailed
 - Five bilingual experiments: beats, square-wave synthesis, missing fundamental, phase, vowels. Predict/explore/explain stages.
 - A/B sound comparison with a blind test (random A or B, charts hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
 - Tap a peak in the spectrum to solo that partial (synthesizer); spectrogram export as PNG.
-- Projector stage (always dark, large charts, playback bar fixed at the bottom); on phones the playback bar is fixed at the bottom too. The heading shrinks after the first visit.
-- Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, projector mode, responsive layout, offline service worker and web app manifest.
+- On phones the playback bar is fixed at the bottom.
+- Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, responsive layout, offline service worker and web app manifest.
 - Optional browser WebMCP read/configure tools (never start sound or recording).
 
 ## Measurement conventions
