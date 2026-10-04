@@ -241,7 +241,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .mode-row,.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}

@@ -1,4 +1,4 @@
-const CACHE='klanglabor-v10';
+const CACHE='klanglabor-v11';
 const ASSETS=['./','./index.html','./style.css','./app.js','./dsp.js','./i18n.js','./synth-worklet.js','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./design/css/my-tokens.css','./design/css/my-schemen.css','./design/icons/sound.svg','./design/icons/creme/sound.svg'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('klanglabor-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
