@@ -79,7 +79,7 @@ small,.hint{font-size:.85rem;color:var(--text-2);line-height:1.55}
 .range-labels{display:flex;justify-content:space-between;color:var(--text-3);font-size:.8rem}
 .partial-heading{margin:26px 0 8px}
 .partial-bars{display:flex;gap:7px;margin:20px 0 10px;height:155px;overflow-x:auto;padding:3px 3px 8px}
-.partial-bar{display:flex;flex:1;min-width:20px;flex-direction:column;align-items:center;gap:9px;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--text-2)}
+.partial-bar{position:relative;display:flex;flex:1;min-width:20px;flex-direction:column;align-items:center;gap:9px;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--text-2)}
 .partial-bar input{writing-mode:vertical-lr;direction:rtl;width:100%;height:126px;appearance:none;background:linear-gradient(to top,var(--akzent) 0 var(--amount),var(--akzent-weich) var(--amount) 100%);border-radius:var(--radius-s);margin:0}
 .partial-bar input::-webkit-slider-thumb{appearance:none;width:100%;height:7px;background:var(--text);border-radius:2px}
 .partial-bar input::-moz-range-thumb{width:100%;height:7px;background:var(--text);border:0}
@@ -181,11 +181,9 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 
 /* Discover keeps the same sound state while progressively revealing controls. */
 .mode-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:24px 0 16px}
-.mode-switch{display:flex;gap:3px;border:1px solid var(--linie);padding:3px;border-radius:var(--radius-l)}
-.mode-switch button{border-color:transparent;font-size:.9rem}
 .analysis-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 0}
 .partial-heading select[hidden]{display:none}
-[data-mode=discover] .finite-note{display:none}
+[data-mode=guided] .finite-note{display:none}
 [data-guided=beats] #partialBars,[data-guided=beats] .partial-heading,[data-guided=beats] .partial-legend,[data-guided=beats] [data-i18n=partialHint],[data-guided=beats] .frequency-value,[data-guided=beats] .field-label,[data-guided=beats] .wide-range,[data-guided=beats] #synthControls>.range-labels,[data-guided=beats] #synthControls>.panel-heading{display:none}
 [data-guided=beats] #advanced>summary,[data-guided=beats] #advanced>.check,[data-guided=phase] #advanced>.check,[data-guided=missing] #advanced>.check{display:none}
 [data-guided=beats] #advanced{border:0;margin:0;padding:0}[data-guided=beats] #partialTable tr:nth-child(n+3){display:none}
@@ -195,9 +193,6 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 [data-guided=beats] #advanced input[type=number]{font-size:1.6rem;padding:12px}[data-guided=beats] #advanced th{font-size:.9rem}
 @media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
 
-.partials-toggle{margin-top:24px;width:100%;text-align:left}
-.partials-toggle::after{content:' +';float:right}
-.partials-toggle[aria-expanded=true]::after{content:' −'}
 .discover-explanation{font-size:.9rem;color:var(--text-2);margin:0 0 12px!important}
 
 /* Keep the status outside the card grid so both columns share a top edge. */
@@ -206,11 +201,11 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 
 /* Share the first grid row so adjacent cards have identical outer heights. */
 @media(min-width:721px){
- [data-mode=discover] .workspace:has(.visuals:not(.prediction)){align-items:stretch}
- [data-mode=discover] .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
- [data-mode=discover] .visuals:not(.prediction){display:contents}
- [data-mode=discover] .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
- [data-mode=discover] .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
+ [data-mode=guided] .workspace:has(.visuals:not(.prediction)){align-items:stretch}
+ [data-mode=guided] .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
+ [data-mode=guided] .visuals:not(.prediction){display:contents}
+ [data-mode=guided] .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
+ [data-mode=guided] .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
 }
 
 /* Teiltöne: Solo hervorgehoben, Stumm/ausgeblendet gedämpft. */
@@ -233,7 +228,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .mode-switch,.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}
@@ -261,3 +256,10 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .settings-content{width:420px;padding:4px 18px 14px}
 .settings-content .stack{margin:14px 0}
 .settings-content .hint{margin:14px 0 0}
+
+/* dB-Wert erscheint beim Ziehen, Zeigen oder Fokussieren über dem Balken. */
+.partial-bar .db{position:absolute;bottom:calc(100% - 2px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;padding:1px 5px;border-radius:var(--radius-s);background:var(--text);color:var(--karte);pointer-events:none;opacity:0;transition:opacity .12s}
+.partial-bar:hover .db,.partial-bar:focus-within .db{opacity:1}
+.partial-bars{padding-top:22px;height:175px}
+#fftDetails{margin-top:14px;padding-top:12px}
+#fftDetails summary{margin-bottom:10px}
