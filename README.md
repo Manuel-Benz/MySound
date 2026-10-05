@@ -15,17 +15,17 @@ Open http://127.0.0.1:4173. AudioWorklet and microphone capture require HTTPS or
 
 ## Interface
 
-One mode: all tools are visible, fine settings (frequency/phase/solo table, FFT settings) are collapsible. Experiments reduce the view to the controls they need: two frequencies for beats, phases and A/B for the phase experiment, fundamental mute for the missing fundamental, partial count for square-wave synthesis, and spectrum comparison/spectrogram for vowels. The top bar holds three dropdowns: Experiments, Sound & sharing (save/load/share/export) and Settings; only one is open at a time. Partial bars show their level in dB relative to the strongest partial on hover/focus, matching the dB spectrum.
+Stage layout: the waves sit in one row at the top (scrolls sideways, a list on phones), waveform and spectrum of their sum below, side by side and equally tall. Each wave card has a shape (sine/triangle/sawtooth/square), frequency (log slider snapping to 5 Hz, arrow keys ±5 Hz, number field takes any value such as 222 or 440.5), amplitude in 1 % steps with its dB level relative to the strongest wave, phase, mute and solo; non-sine waves can be split into their sine waves. Experiments reduce the view to what they need. The top bar holds three dropdowns (Experiments, Sound & sharing, Settings; only one open at a time) and a Full screen button wherever the browser supports it (not on iPhone).
 
 ## Included
 
-- Additive synthesizer with 9, 16 or 32 sine partials, sine/triangle/sawtooth/square presets, individual amplitude, phase, free/harmonic frequencies, mute and solo.
+- Synthesizer of up to 16 superimposed waves; triangle, sawtooth and square are built from up to 25 sine partials. Older saved sounds and share links (fundamental plus partial bars) are converted to waves.
 - Separate audio thread, 25 ms configuration crossfades, anti-clipping normalization, Nyquist exclusion and low initial volume.
 - Time waveform, Blackman-windowed FFT (2048–32768), logarithmic/linear frequency axis, peak/cursor readout, adjustable smoothing, freeze, stored spectrum overlay, spectrogram.
 - Microphone input without speaker monitoring, local audio-file decoding/playback/seek/loop.
 - Five bilingual experiments: beats, square-wave synthesis, missing fundamental, phase, vowels. Predict/explore/explain stages.
 - A/B sound comparison with a blind test (random A or B, charts hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
-- Tap a peak in the spectrum to solo that partial (synthesizer); spectrogram export as PNG.
+- Tap a peak in the spectrum to solo that wave (synthesizer); spectrogram export as PNG.
 - On phones the playback bar is fixed at the bottom.
 - Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, responsive layout, offline service worker and web app manifest.
 - Optional browser WebMCP read/configure tools (never start sound or recording).
@@ -40,7 +40,7 @@ FFT values use Web Audio's 1/N magnitude convention and Blackman window. This af
 npm test
 ```
 
-Node's built-in test runner checks spectral peak position, normalization, presets, mute/solo, Nyquist exclusion, beats, shared-input bounds and defaults, the dB rule of the partial bars, PCM WAV output, worklet phase relationships, matching DE/EN message tables, and two regressions (blind-test CSS, old service-worker caches). The Pages workflow runs the tests before every deploy.
+Node's built-in test runner checks spectral peak position, wave shapes and normalization, mute/solo, Nyquist exclusion, beats, wave phase as time shift, shared-input bounds and defaults, conversion of older sounds, the dB rule, PCM WAV output, worklet phases and continuity (including waves switched back on), matching DE/EN message tables, and two regressions (blind-test CSS, old service-worker caches). The Pages workflow runs the tests before every deploy.
 
 ## Source
 

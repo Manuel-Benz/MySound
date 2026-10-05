@@ -66,39 +66,19 @@ small,.hint{font-size:.85rem;color:var(--text-2);line-height:1.55}
 .app{max-width:1480px;margin:auto;padding:0 36px}
 .source-tabs{display:flex;gap:3px;flex-wrap:wrap;border:1px solid var(--linie);padding:3px;border-radius:var(--radius-l)}
 .source-tabs button{border-color:transparent;font-size:.9rem}
-.workspace{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.4fr);gap:18px;align-items:start}
 .panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;min-width:0}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}
 .panel-heading select{font-size:.85rem}
 .inline-label{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-2)}
-.field-label{font-size:.85rem;color:var(--text-2)}
-.frequency-value{display:flex;align-items:baseline;gap:10px;margin-top:6px}
-.frequency-value input{font:600 2.8rem var(--schrift);font-variant-numeric:tabular-nums;letter-spacing:-.02em;width:5.5ch;border:0;background:transparent;padding:0}
-.frequency-value span{color:var(--text-2)}
-.wide-range{width:100%;margin:16px 0 5px}
 .range-labels{display:flex;justify-content:space-between;color:var(--text-3);font-size:.8rem}
-.partial-heading{margin:26px 0 8px}
-.partial-bars{display:flex;gap:7px;margin:20px 0 10px;height:175px;overflow-x:auto;padding:22px 3px 8px}
-.partial-bar{position:relative;display:flex;flex:1;min-width:20px;flex-direction:column;align-items:center;gap:9px;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--text-2)}
-.partial-bar input{writing-mode:vertical-lr;direction:rtl;width:100%;height:126px;appearance:none;background:linear-gradient(to top,var(--akzent) 0 var(--amount),var(--akzent-weich) var(--amount) 100%);border-radius:var(--radius-s);margin:0}
-.partial-bar input::-webkit-slider-thumb{appearance:none;width:100%;height:7px;background:var(--text);border-radius:2px}
-.partial-bar input::-moz-range-thumb{width:100%;height:7px;background:var(--text);border:0}
-.partial-bar:has(input:disabled){opacity:.35}
-.partial-legend{display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-3);gap:10px}
-.finite-note{margin:18px 0 0}
 details{border-top:1px solid var(--linie);margin-top:22px;padding-top:16px}
 summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .check{display:flex;align-items:center;gap:8px;font-size:.9rem;line-height:1.4}
-.table-scroll{overflow:auto;margin-top:14px}
-table{width:100%;border-collapse:collapse;font-size:.85rem;font-variant-numeric:tabular-nums}
-th{text-align:left;font-weight:600;color:var(--text-2)}
-td,th{padding:6px 3px}
-td input[type=number]{min-width:66px;width:100%;padding:5px;font-size:.85rem;border-radius:var(--radius-s)}
-td input[type=checkbox]{width:16px;height:16px}
-.visuals{display:grid;gap:18px;min-width:0}
+.visuals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;min-width:0}
+#spectrogramPanel{grid-column:1/-1}
 /* pan-y: Auf Touchgeräten lässt sich über den Diagrammen weiter scrollen, waagrechtes Ziehen bleibt Cursor. */
-.chart-panel canvas{display:block;width:100%;height:180px;touch-action:pan-y}
-.chart-panel{padding-bottom:16px}
+.chart-panel canvas{display:block;width:100%;height:clamp(200px,34vh,460px);flex:1 0 auto;touch-action:pan-y}
+.chart-panel{padding-bottom:16px;display:flex;flex-direction:column}
 .chart-panel .panel-heading{margin-bottom:8px}
 .subtle{color:var(--text-2);font-size:.85rem;margin-top:10px}
 .chart-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.8rem;margin-top:5px}
@@ -126,7 +106,6 @@ td input[type=checkbox]{width:16px;height:16px}
 .stack{display:flex;flex-direction:column;gap:9px;margin:20px 0;font-size:.9rem}
 .file-drop{display:flex;flex-direction:column;gap:15px;border:1px dashed var(--linie);padding:25px 15px;margin:20px 0;border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
 .file-drop input{max-width:100%;font-size:.85rem;font-weight:400;color:var(--text)}
-.controls-panel>div>h2{margin-bottom:16px}
 
 dialog{background:var(--karte);color:var(--text);border:1px solid var(--linie);border-radius:var(--radius-l);box-shadow:var(--schatten);max-width:min(660px,calc(100vw - 28px));width:620px;padding:26px;max-height:85dvh;overflow:auto}
 dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
@@ -165,8 +144,8 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .experiment .answer{border-top:1px solid var(--linie);padding-top:12px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 [hidden]{display:none!important}
-@media(max-width:1000px){.app{padding:0 22px}.topbar-inner{padding:10px 22px}.workspace{grid-template-columns:minmax(270px,.85fr) minmax(0,1.2fr)}.analyser-options{flex-wrap:wrap;gap:10px}.panel{padding:17px}.chart-bottom output{font-size:.75rem}}
-@media(max-width:720px){.app{padding:0 16px}.topbar-inner{padding:8px 16px}.workspace{grid-template-columns:1fr}h1{font-size:2rem}.chart-panel canvas{height:190px}.page-footer{flex-wrap:wrap}.experiment{padding:16px}}
+@media(max-width:1000px){.app{padding:0 22px}.topbar-inner{padding:10px 22px}.analyser-options{flex-wrap:wrap;gap:10px}.panel{padding:17px}.chart-bottom output{font-size:.75rem}}
+@media(max-width:720px){.app{padding:0 16px}.topbar-inner{padding:8px 16px}.visuals{grid-template-columns:1fr}h1{font-size:2rem}.chart-panel canvas{height:190px}.page-footer{flex-wrap:wrap}.experiment{padding:16px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Vorhersage: Diagramme verdeckt, mit dem Wal als Leerzustand. */
@@ -182,35 +161,12 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 /* Quellenwahl und Werkzeugleiste; in Experimenten blendet app.js (renderMode) alles Unnötige aus. */
 .mode-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:24px 0 16px}
 .analysis-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 0}
-[data-guided] .finite-note{display:none}
-[data-guided=beats] #partialBars,[data-guided=beats] .partial-heading,[data-guided=beats] .partial-legend,[data-guided=beats] [data-i18n=partialHint],[data-guided=beats] .frequency-value,[data-guided=beats] .field-label,[data-guided=beats] .wide-range,[data-guided=beats] #synthControls>.range-labels,[data-guided=beats] #synthControls>.panel-heading{display:none}
-[data-guided=beats] #advanced>summary,[data-guided=beats] #advanced>.check,[data-guided=phase] #advanced>.check,[data-guided=missing] #advanced>.check{display:none}
-[data-guided=beats] #advanced{border:0;margin:0;padding:0}[data-guided=beats] #partialTable tr:nth-child(n+3){display:none}
-[data-guided=beats] #advanced th:nth-child(n+3),[data-guided=beats] #advanced td:nth-child(n+3){display:none}
-[data-guided=phase] #advanced th:nth-child(2),[data-guided=phase] #advanced td:nth-child(2),[data-guided=phase] #advanced th:nth-child(3),[data-guided=phase] #advanced td:nth-child(3),[data-guided=phase] #advanced th:nth-child(n+5),[data-guided=phase] #advanced td:nth-child(n+5){display:none}
-[data-guided=missing] #partialTable tr:nth-child(n+2),[data-guided=missing] #advanced th:nth-child(2),[data-guided=missing] #advanced td:nth-child(2),[data-guided=missing] #advanced th:nth-child(3),[data-guided=missing] #advanced td:nth-child(3),[data-guided=missing] #advanced th:nth-child(4),[data-guided=missing] #advanced td:nth-child(4),[data-guided=missing] #advanced th:nth-child(6),[data-guided=missing] #advanced td:nth-child(6){display:none}
-[data-guided=beats] #advanced input[type=number]{font-size:1.6rem;padding:12px}[data-guided=beats] #advanced th{font-size:.9rem}
 @media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
 
 .explanation{font-size:.9rem;color:var(--text-2);margin:0 0 12px!important}
 
-/* Keep the status outside the card grid so both columns share a top edge. */
-.workspace>.controls-panel,.visuals{align-self:start}
-.chart-panel .panel-heading,#synthControls>.panel-heading{min-height:42px}
 
-/* Share the first grid row so adjacent cards have identical outer heights. */
-@media(min-width:721px){
- [data-guided] .workspace:has(.visuals:not(.prediction)){align-items:stretch}
- [data-guided] .workspace:has(.visuals:not(.prediction))>.controls-panel{grid-column:1;grid-row:1;align-self:stretch}
- [data-guided] .visuals:not(.prediction){display:contents}
- [data-guided] .visuals:not(.prediction)>.chart-panel{grid-column:2;align-self:stretch}
- [data-guided] .visuals:not(.prediction)>.chart-panel:first-child{grid-row:1}
-}
 
-/* Teiltöne: Solo hervorgehoben, Stumm/ausgeblendet gedämpft. */
-.partial-bar.solo input{outline:2px solid var(--akzent);outline-offset:2px}
-.partial-bar.solo span{color:var(--akzent-text);font-weight:700}
-.partial-bar.muted input{opacity:.35}
 button.small{min-height:32px;padding:.3rem .7rem;font-size:.85rem}
 button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-color:transparent;font-weight:600}
 
@@ -256,8 +212,34 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .settings-content .stack{margin:14px 0}
 .settings-content .hint{margin:14px 0 0}
 
-/* dB-Wert erscheint beim Ziehen, Zeigen oder Fokussieren über dem Balken. */
-.partial-bar .db{position:absolute;bottom:calc(100% - 2px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;padding:1px 5px;border-radius:var(--radius-s);background:var(--text);color:var(--karte);pointer-events:none;opacity:0;transition:opacity .12s}
-.partial-bar:hover .db,.partial-bar:focus-within .db{opacity:1}
 #fftDetails{margin-top:14px;padding-top:12px}
 #fftDetails summary{margin-bottom:10px}
+
+/* Bühne: Wellen oben in einer Reihe (feste Höhe, waagrecht scrollbar), Diagramme darunter nebeneinander. */
+.workspace{display:flex;flex-direction:column;gap:18px}
+.waves-heading{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.waves-heading .hint{margin:0}
+.wave-cards{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
+.wave-card{flex:0 0 236px;scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:12px 14px}
+.wave-card.solo{border-color:var(--akzent);box-shadow:inset 0 0 0 1px var(--akzent)}
+.wave-card.muted>:not(.wave-head):not(.wave-foot),.wave-card.muted .wave-foot>.wave-row{opacity:.4}
+.wave-head{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.wave-index{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--akzent-weich);color:var(--akzent-text);font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
+.wave-shape{flex:1;min-width:0;min-height:34px;padding:.3rem .5rem;font-size:.9rem}
+.wave-remove{flex:none;width:34px;min-height:34px;padding:0;border-color:transparent;color:var(--text-3);font-size:1.25rem}
+.wave-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--text-2)}
+.wave-value{display:flex;align-items:center;gap:5px}
+.wave-value input[type=number]{padding:.25rem .4rem;text-align:right;font-variant-numeric:tabular-nums;border-radius:var(--radius-s);color:var(--text)}
+.wave-value .wave-f{width:9ch}.wave-value .wave-a,.wave-value .wave-p{width:6ch}
+.wave-unit{min-width:2ch}
+.wave-db{min-width:6.5ch;text-align:right;font-size:.75rem;color:var(--text-3)}
+.wave-card input[type=range]{width:100%;margin:0 0 4px}
+.wave-foot{display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid var(--linie)}
+.wave-buttons{display:flex;gap:6px}
+.wave-buttons button{flex:1;padding:.25rem .4rem}
+.wave-add{flex:0 0 150px;border:1px dashed var(--linie);border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
+.source-panel>*{max-width:760px}
+.source-panel>h2{margin-bottom:16px}
+/* Geführte Experimente: Phase nur dort, wo sie Thema ist. */
+[data-guided=beats] .wave-foot>.wave-row,[data-guided=missing] .wave-foot>.wave-row,[data-guided=harmonics] .wave-foot>.wave-row{display:none}
+@media(max-width:720px){.wave-cards{flex-direction:column;overflow:visible}.wave-card,.wave-add{flex:none}.wave-add{min-height:48px}}
