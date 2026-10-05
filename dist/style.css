@@ -74,9 +74,8 @@ details{border-top:1px solid var(--linie);margin-top:22px;padding-top:16px}
 summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .check{display:flex;align-items:center;gap:8px;font-size:.9rem;line-height:1.4}
 .visuals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;min-width:0}
-#spectrogramPanel{grid-column:1/-1}
 /* pan-y: Auf Touchgeräten lässt sich über den Diagrammen weiter scrollen, waagrechtes Ziehen bleibt Cursor. */
-.chart-panel canvas{display:block;width:100%;height:clamp(200px,34vh,460px);flex:1 0 auto;touch-action:pan-y}
+.chart-panel canvas{display:block;width:100%;height:clamp(180px,28vh,360px);flex:1 0 auto;touch-action:pan-y}
 .chart-panel{padding-bottom:16px;display:flex;flex-direction:column}
 .chart-panel .panel-heading{margin-bottom:8px}
 .subtle{color:var(--text-2);font-size:.85rem;margin-top:10px}
@@ -90,14 +89,15 @@ summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .analyser-options select{font-size:.85rem}
 .analyser-options input{width:95px}
 .chart-panel p{margin-bottom:0}
-.transport{display:flex;align-items:center;flex-wrap:wrap;padding:8px 0 18px;margin-bottom:20px;gap:18px;border-bottom:1px solid var(--linie)}
-.transport #freezeBtn{margin-left:auto}
+.transport{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
 .volume{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text-2);flex-wrap:wrap}
 .volume input{width:100px}
 .volume output{min-width:4ch;font-variant-numeric:tabular-nums}
-.presets-bar{display:flex;align-items:center;justify-content:flex-start;gap:14px;flex-wrap:wrap;padding:18px 0}
-.ab-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem}
-.ab-group>.mono{color:var(--text-2);margin-right:4px}
+/* A/B im Menü «Klang & Teilen»: merken | laden je Zeile, Blindtest darunter. */
+.ab-group{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;padding-top:4px;border-top:1px solid var(--linie)}
+.ab-group[hidden]{display:none}
+.menu-label{grid-column:1/-1;font-size:.75rem;font-weight:600;color:var(--text-3);padding:.35rem .7rem 0}
+.ab-group #blindBtn{grid-column:1/-1}
 .status{font-size:.9rem;color:var(--akzent-text);min-height:26px}
 .status.error{color:var(--rot)}
 .page-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--text-3);font-size:.85rem;padding:10px 0 22px}
@@ -151,15 +151,13 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .visuals.prediction>section{visibility:hidden}
 .visuals.prediction:after{content:attr(data-prediction);position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:40px;padding-top:150px;border:1px dashed var(--linie);border-radius:var(--radius-l);background:var(--karte) url(design/icons/creme/sound.svg) center calc(50% - 50px)/88px no-repeat;font:600 1.35rem/1.5 var(--schrift);letter-spacing:-.01em;color:var(--text-2)}
 /* Zustand als Pille: Live = Grün, Eingefroren = Blau, sonst Akzent. */
-.analysis-state{font-family:var(--schrift);display:inline-block;font-size:12px;font-weight:600;color:var(--akzent-text);background:var(--akzent-weich);border-radius:var(--radius-pille);padding:3px 10px;margin:0 0 12px;line-height:1.5}
-.analysis-state:empty{display:none}
+.analysis-state{font-family:var(--schrift);font-size:12px;font-weight:600;color:var(--akzent-text);background:var(--akzent-weich);border:0;border-radius:var(--radius-pille);padding:3px 10px;margin:0;min-height:0;line-height:1.5;cursor:pointer}
 .analysis-state[data-state=live]{color:var(--gruen);background:var(--live-weich)}
 .analysis-state[data-state=frozen]{color:var(--blau);background:var(--info-weich)}
 
 /* Quellenwahl und Werkzeugleiste; in Experimenten blendet app.js (renderMode) alles Unnötige aus. */
-.mode-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:24px 0 16px}
-.analysis-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 0}
-@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.transport{gap:12px}.transport #freezeBtn{margin-left:0}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
+.mode-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;margin:18px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--linie)}
+@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px;border-bottom:0;padding-bottom:0}.transport{gap:12px}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
 
 .explanation{font-size:.9rem;color:var(--text-2);margin:0 0 12px!important}
 
@@ -181,7 +179,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .workspace,.blind .presets-bar,.blind #actionsMenu,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .workspace,.blind #actionsMenu,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}
@@ -218,13 +216,15 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .waves-heading{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:10px}
 .waves-heading .hint{margin:0}
 .wave-cards{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
-.wave-card{box-shadow:inset 0 4px 0 var(--welle);flex:0 0 236px;scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:12px 14px}
+.wave-card{box-shadow:inset 0 4px 0 var(--welle);flex:0 0 244px;scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:10px 12px}
 .wave-card.solo{border-color:var(--welle);box-shadow:inset 0 4px 0 var(--welle),inset 0 0 0 1px var(--welle)}
 .wave-card.muted>:not(.wave-head):not(.wave-foot),.wave-card.muted .wave-foot>.wave-row{opacity:.4}
 .wave-head{display:flex;align-items:center;gap:8px;margin-bottom:2px}
 .wave-index{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--welle);color:var(--welle-ink);font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
 .wave-shape{flex:1;min-width:0;min-height:34px;padding:.3rem .5rem;font-size:.9rem}
-.wave-remove{flex:none;width:34px;min-height:34px;padding:0;border-color:transparent;color:var(--text-3);font-size:1.25rem}
+.wave-remove,.wave-split{flex:none;width:30px;min-height:32px;padding:0;border-color:transparent;color:var(--text-3);font-size:1.25rem}
+.wave-split{font-size:1rem}
+.wave-split[hidden]{display:none}
 .wave-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--text-2)}
 .wave-value{display:flex;align-items:center;gap:5px}
 .wave-value input[type=number]{padding:.25rem .4rem;text-align:right;font-variant-numeric:tabular-nums;border-radius:var(--radius-s);color:var(--text)}
@@ -233,9 +233,11 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .wave-db{min-width:6.5ch;text-align:right;font-size:.75rem;color:var(--text-3)}
 .wave-card input[type=range]{width:100%;margin:0 0 4px;accent-color:var(--welle)}
 .wave-card.muted{box-shadow:none}.wave-card.muted .wave-index{background:var(--linie);color:var(--text-2)}
-.wave-foot{display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid var(--linie)}
-.wave-buttons{display:flex;gap:6px}
-.wave-buttons button{flex:1;padding:.25rem .4rem}
+/* Fusszeile: Phase (φ) links, Stumm/Solo rechts. */
+.wave-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:6px;border-top:1px solid var(--linie)}
+.wave-foot .wave-label{font-style:italic;font-size:1rem;cursor:help}
+.wave-buttons{display:flex;gap:4px;margin-left:auto}
+.wave-buttons button{padding:.25rem .5rem}
 .wave-add{flex:0 0 150px;border:1px dashed var(--linie);border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
 .source-panel>*{max-width:760px}
 .source-panel>h2{margin-bottom:16px}
@@ -252,3 +254,14 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
  [data-modus=dunkel] .welle{--welle:oklch(from var(--welle-ton) max(l,.7) c h)}
  [data-modus=hell] .welle{--welle:oklch(from var(--welle-ton) min(l,.55) c h)}
 }
+
+/* Diagrammköpfe: i blendet die Erklärung ein; Spektrum/Spektrogramm als Umschalter, Werkzeuge rechts. */
+.info-btn{flex:none;width:22px;height:22px;min-height:0;padding:0;border-radius:50%;font:italic 600 .8rem/1 Georgia,serif;color:var(--text-2)}
+.info-btn[aria-expanded=true]{color:var(--akzent-ink);background:var(--akzent);border-color:var(--akzent)}
+.chart-panel .panel-heading{justify-content:flex-start}
+.chart-panel .panel-heading>:last-child{margin-left:auto}
+.view-switch{display:flex;gap:2px;border:1px solid var(--linie);padding:2px;border-radius:var(--radius)}
+.view-switch button{border-color:transparent;min-height:30px;padding:.2rem .65rem;font-size:.85rem;font-weight:600}
+.view-switch button[aria-pressed=true]{background:var(--akzent-weich);color:var(--akzent-text)}
+.heading-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.heading-tools [hidden]{display:none}

@@ -1,5 +1,5 @@
-const CACHE='mysound-v19';
-const ASSETS=['./','./index.html','./style.css?v=19','./app.js?v=19','./dsp.js?v=19','./i18n.js?v=19','./synth-worklet.js?v=19','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./design/css/my-tokens.css','./design/css/my-schemen.css','./design/icons/sound.svg','./design/icons/creme/sound.svg'];
+const CACHE='mysound-v21';
+const ASSETS=['./','./index.html','./style.css?v=21','./app.js?v=21','./dsp.js?v=21','./i18n.js?v=21','./synth-worklet.js?v=21','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./design/css/my-tokens.css','./design/css/my-schemen.css','./design/icons/sound.svg','./design/icons/creme/sound.svg'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>(k.startsWith('mysound-')||k.startsWith('klanglabor-'))&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok&&response.type==='basic'){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}return response;}).catch(()=>caches.match(event.request).then(response=>response||new Response('Offline',{status:503}))));});
