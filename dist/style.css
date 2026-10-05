@@ -49,9 +49,9 @@ small,.hint{font-size:.85rem;color:var(--text-2);line-height:1.55}
 .brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:#FFFFFF;font-weight:700;font-size:1.05rem;letter-spacing:-.02em}
 .brandmark{display:block;width:24px;height:24px;border-radius:var(--radius-s)}
 .top-actions{display:flex;gap:4px;flex-wrap:wrap}
-.top-actions>button,.actions-menu>summary{color:#D8D8DC;background:transparent;border:0;border-radius:var(--radius);min-height:38px;padding:.45rem .85rem;font-size:.95rem;cursor:pointer}
-.top-actions>button:hover:not(:disabled),.actions-menu>summary:hover{background:rgba(255,255,255,.08);color:#FFFFFF}
-.top-actions>button.active,.actions-menu>summary.active,.actions-menu[open]>summary{background:var(--leiste-aktiv);color:#FFFFFF}
+.actions-menu>summary{color:#D8D8DC;background:transparent;border:0;border-radius:var(--radius);min-height:38px;padding:.45rem .85rem;font-size:.95rem;cursor:pointer}
+.actions-menu>summary:hover{background:rgba(255,255,255,.08);color:#FFFFFF}
+.actions-menu>summary.active,.actions-menu[open]>summary{background:var(--leiste-aktiv);color:#FFFFFF}
 .actions-menu{position:relative;margin:0;padding:0;border:0}
 .actions-menu>summary{list-style:none;margin:0;display:flex;align-items:center;font-weight:400}
 .actions-menu>summary::-webkit-details-marker{display:none}
@@ -156,7 +156,7 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 
 /* Quellenwahl und Werkzeugleiste; in Experimenten blendet app.js (renderMode) alles Unnötige aus. */
 .mode-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;margin:18px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--linie)}
-@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px;border-bottom:0;padding-bottom:0}.transport{gap:12px}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.top-actions>button,.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
+@media(max-width:720px){.mode-row{align-items:flex-start;flex-direction:column;gap:8px;border-bottom:0;padding-bottom:0}.transport{gap:12px}.top-actions{position:relative}.actions-menu{position:static}.actions-content{left:0;right:auto;max-width:100%}.top-actions{gap:0}.actions-menu>summary{padding:.4rem .55rem;font-size:.9rem}}
 
 .explanation{font-size:.9rem;color:var(--text-2);margin:0 0 12px!important}
 
@@ -186,6 +186,12 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .blind-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .blind-panel .hint{margin:4px 0 0}
 
+/* Vollbild als Symbol in der Fusszeile. */
+.footer-tools{display:flex;align-items:center;gap:12px}
+.fullscreen-btn{display:grid;place-items:center;width:36px;height:36px;min-height:0;padding:0;border-radius:50%;color:var(--text-2)}
+.fullscreen-btn:hover{color:var(--text)}
+.fullscreen-btn.active{color:var(--akzent-ink);background:var(--akzent);border-color:var(--akzent)}
+.fullscreen-btn[hidden]{display:none}
 /* Kopf nach dem ersten Besuch kleiner. */
 /* Handy: Wiedergabe als feste Leiste am unteren Rand. */
 @media(max-width:720px){
@@ -212,8 +218,6 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 
 /* Bühne: Wellen oben in einer Reihe (feste Höhe, waagrecht scrollbar), Diagramme darunter nebeneinander. */
 .workspace{display:flex;flex-direction:column;gap:18px}
-.waves-heading{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:10px}
-.waves-heading .hint{margin:0}
 .wave-cards{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
 .wave-card{box-shadow:inset 0 4px 0 var(--welle);flex:0 0 244px;scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:10px 12px}
 .wave-card.solo{border-color:var(--welle);box-shadow:inset 0 4px 0 var(--welle),inset 0 0 0 1px var(--welle)}
