@@ -10,8 +10,7 @@ html{color-scheme:light dark}
  --mono:ui-monospace,'SF Mono','SFMono-Regular',Menlo,Consolas,monospace;
  font-size:16px
 }
-/* Vergleichskurve braucht einen anderen Ton als der Akzent. */
-[data-ton="8"]{--compare:var(--ton-5)}
+/* --compare und --theory-1…3 setzt app.js (applyTones): Vergleichskurve und Wellenfarben meiden den Akzent. */
 @media (prefers-color-scheme:dark){:root{--live-weich:color-mix(in srgb,var(--gruen) 22%,var(--karte));--info-weich:color-mix(in srgb,var(--blau) 22%,var(--karte))}}
 [data-modus=dunkel]{--live-weich:color-mix(in srgb,var(--gruen) 22%,var(--karte));--info-weich:color-mix(in srgb,var(--blau) 22%,var(--karte))}
 [data-modus=hell]{--live-weich:color-mix(in srgb,var(--gruen) 14%,var(--karte));--info-weich:color-mix(in srgb,var(--blau) 14%,var(--karte))}
@@ -85,7 +84,7 @@ summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .chart-bottom output{font-family:var(--mono);color:var(--text-2)}
 .legend{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--text-2)}
 .swatch{display:inline-block;width:15px;height:2px;background:var(--trace)}
-.swatch.theory{background:linear-gradient(90deg,var(--ton-1) 0 33%,var(--ton-4) 0 66%,var(--ton-7) 0)}
+.swatch.theory{background:linear-gradient(90deg,var(--theory-1) 0 33%,var(--theory-2) 0 66%,var(--theory-3) 0)}
 .analyser-options{display:flex;gap:20px;border-top:1px solid var(--linie);margin-top:16px;padding-top:14px}
 .analyser-options label{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-2);min-width:0}
 .analyser-options select{font-size:.85rem}
@@ -142,7 +141,6 @@ dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .steps [data-state=current] button{font-weight:650;color:var(--akzent-text)}
 .steps [data-state=todo] button{color:var(--text-2)}
 .experiment .answer{border-top:1px solid var(--linie);padding-top:12px}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 [hidden]{display:none!important}
 @media(max-width:1000px){.app{padding:0 22px}.topbar-inner{padding:10px 22px}.analyser-options{flex-wrap:wrap;gap:10px}.panel{padding:17px}.chart-bottom output{font-size:.75rem}}
 @media(max-width:720px){.app{padding:0 16px}.topbar-inner{padding:8px 16px}.visuals{grid-template-columns:1fr}h1{font-size:2rem}.chart-panel canvas{height:190px}.page-footer{flex-wrap:wrap}.experiment{padding:16px}}
@@ -183,7 +181,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .workspace,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .workspace,.blind .presets-bar,.blind #actionsMenu,.blind #analysisTools,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
-import {makeWave,generateSamples,spectrum,validateSound,wavBuffer,activeWaves,activePartials,normalization,shapePartials,relativeDb} from '../dist/dsp.js';
+import {MAX_PARTIALS,makeWave,generateSamples,spectrum,validateSound,wavBuffer,activeWaves,activePartials,normalization,shapePartials,relativeDb} from '../dist/dsp.js';
 import {messages} from '../dist/i18n.js';
 const dist=file=>readFileSync(new URL('../dist/'+file,import.meta.url),'utf8');
 const sound=(...waves)=>({waves:waves.length?waves:[makeWave(375)]});
@@ -32,3 +32,8 @@ test('message tables match and cover every key the app and page use',()=>{const 
 test('blind test hides the work area (selector must match html.blind .workspace)',()=>{const css=dist('style.css');assert.match(css,/\.blind \.workspace[,{]/);assert.doesNotMatch(css,/\.blind \.blind/);});
 test('service worker evicts caches of the previous app name',()=>{const sw=dist('sw.js');assert.match(sw,/klanglabor-/);});
 test('cache-busting version is identical in page, app and service worker',()=>{const versions=new Set();for(const file of ['index.html','app.js','sw.js'])for(const m of dist(file).matchAll(/[?]v=(\d+)|mysound-v(\d+)/g))versions.add(m[1]||m[2]);assert.equal(versions.size,1,[...versions].join(','));});
+
+test('legacy conversion keeps mute/solo, strongest 16 partials, drops sub-20 Hz partials',()=>{const muted=validateSound({fundamental:220,harmonic:true,preset:'saw',partials:Array.from({length:9},(_,i)=>({a:1/(i+1),mute:i===0}))});assert.equal(muted.waves.length,9);assert.equal(muted.waves[0].mute,true);const many=validateSound({fundamental:110,harmonic:true,preset:'custom',partials:Array.from({length:32},(_,i)=>({a:1/(i+1)}))});assert.equal(many.waves.length,16);assert.equal(many.waves[0].f,110);assert.equal(many.waves.at(-1).f,1760);assert.deepEqual(validateSound({fundamental:220,harmonic:false,preset:'custom',partials:[{a:1,f:5},{a:1,f:220}]}).waves.map(w=>w.f),[220]);});
+test('null frequency falls back to 220 Hz',()=>{assert.equal(validateSound({waves:[{f:null,a:1},{f:'',a:1}]}).waves[0].f,220);});
+test('many waves share a bounded partial budget',()=>{const s=sound(...Array.from({length:16},(_,i)=>makeWave(100+i*50,'saw')));assert.ok(activePartials(s).length<=MAX_PARTIALS);assert.ok(Math.max(...generateSamples(s,4800).map(Math.abs))<=1);});
+test('a second reconfiguration during a crossfade does not jump',()=>{const w=worklet(),s=sound(makeWave(220,'sine',1));configure(w,s);run(w,3000);const a=run(w,1000);s.waves[0].a=.2;configure(w,s);const b=run(w,256);s.waves[0].a=1;configure(w,s);const c=run(w,2000);const all=[...a,...b,...c];assert.ok(maxJump(all)<=maxJump(a)*1.1+.01,'click');});

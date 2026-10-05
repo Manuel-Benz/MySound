@@ -19,12 +19,12 @@ Stage layout: the waves sit in one row at the top (scrolls sideways, a list on p
 
 ## Included
 
-- Synthesizer of up to 16 superimposed waves; triangle, sawtooth and square are built from up to 25 sine partials. Older saved sounds and share links (fundamental plus partial bars) are converted to waves.
+- Synthesizer of up to 16 superimposed waves; triangle, sawtooth and square are built from up to 25 sine partials (all waves together share a budget of 160 partials, so very many waves get fewer harmonics each). Older saved sounds and share links (fundamental plus partial bars) are converted to waves, keeping mute/solo; beyond 16 partials the strongest are kept and partials below 20 Hz are dropped.
 - Separate audio thread, 25 ms configuration crossfades, anti-clipping normalization, Nyquist exclusion and low initial volume.
 - Time waveform, Blackman-windowed FFT (2048–32768), logarithmic/linear frequency axis, peak/cursor readout, adjustable smoothing, freeze, stored spectrum overlay, spectrogram.
 - Microphone input without speaker monitoring, local audio-file decoding/playback/seek/loop.
 - Five bilingual experiments: beats, square-wave synthesis, missing fundamental, phase, vowels. Predict/explore/explain stages.
-- A/B sound comparison with a blind test (random A or B, charts hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
+- A/B sound comparison with a blind test (random A or B, charts, A/B buttons and the sound menu hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
 - Tap a peak in the spectrum to solo that wave (synthesizer); spectrogram export as PNG.
 - On phones the playback bar is fixed at the bottom.
 - Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, responsive layout, offline service worker and web app manifest.
