@@ -98,8 +98,21 @@ summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .page-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--text-3);font-size:.85rem;padding:10px 0 22px}
 .text-button{background:transparent;border:0;color:var(--akzent-text);font-size:.85rem;min-height:0;padding:.3rem .5rem}
 .stack{display:flex;flex-direction:column;gap:9px;margin:20px 0;font-size:.9rem}
-.file-drop{display:flex;flex-direction:column;gap:15px;border:1px dashed var(--linie);padding:25px 15px;margin:20px 0;border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
-.file-drop input{max-width:100%;font-size:.85rem;font-weight:400;color:var(--text)}
+/* Dateiauswahl und Übersicht nutzen die volle Breite des Kastens. */
+.source-panel>.overview,.source-panel>.file-row{max-width:none}
+/* Übersicht der ganzen Datei; ein unsichtbarer Regler darüber übernimmt Klick, Ziehen und Tastatur. */
+.overview{position:relative;height:72px;margin:0 0 8px;border-radius:var(--radius-s);overflow:hidden}
+.overview canvas{display:block;width:100%;height:100%}
+.overview input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;-webkit-appearance:none;appearance:none;background:none;touch-action:none}
+.overview input::-webkit-slider-thumb{-webkit-appearance:none;width:1px;height:72px}
+.overview input::-moz-range-thumb{width:1px;height:72px;border:0}
+.overview:has(input:focus-visible){outline:2px solid var(--akzent);outline-offset:3px}
+/* Dateiauswahl: eine Zeile mit Knopf, Dateiname und Zeit. */
+.file-row{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:12px}
+.file-row input{min-width:0;max-width:100%;font-size:.9rem;color:var(--text)}
+.file-row input::file-selector-button{font:inherit;font-weight:600;color:var(--akzent-text);background:transparent;border:1px solid var(--linie);border-radius:var(--radius);padding:.55rem .9rem;margin-right:12px;min-height:42px;cursor:pointer}
+.file-row input::file-selector-button:hover{background:var(--hover)}
+.file-row p{margin:0}
 
 dialog{background:var(--karte);color:var(--text);border:1px solid var(--linie);border-radius:var(--radius-l);box-shadow:var(--schatten);max-width:min(660px,calc(100vw - 28px));width:620px;padding:26px;max-height:85dvh;overflow:auto}
 dialog::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
@@ -236,7 +249,8 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .wave-buttons button{padding:.25rem .5rem}
 .wave-add{flex:0 0 150px;border:1px dashed var(--linie);border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
 .source-panel>*{max-width:760px}
-.source-panel>h2{margin-bottom:16px}
+/* Mikrofon-Kasten nur zeigen, wenn die Geräteauswahl gebraucht wird. */
+#micControls:not(:has(label:not([hidden]))){display:none}
 /* Geführte Experimente: Phase nur dort, wo sie Thema ist. */
 [data-guided=beats] .wave-foot>.wave-row,[data-guided=missing] .wave-foot>.wave-row,[data-guided=harmonics] .wave-foot>.wave-row{display:none}
 @media(max-width:720px){.wave-cards{flex-direction:column;overflow:visible}.wave-card,.wave-add{flex:none}.wave-add{min-height:48px}}

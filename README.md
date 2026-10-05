@@ -22,7 +22,7 @@ Stage layout: source tabs, play button and volume share one bar; the waves sit i
 - Synthesizer of up to 16 superimposed waves; triangle, sawtooth and square are built from up to 25 sine partials (all waves together share a budget of 160 partials, so very many waves get fewer harmonics each). Older saved sounds and share links (fundamental plus partial bars) are converted to waves, keeping mute/solo; beyond 16 partials the strongest are kept and partials below 20 Hz are dropped.
 - Separate audio thread, 25 ms configuration crossfades, anti-clipping normalization, Nyquist exclusion and low initial volume.
 - Time waveform, Blackman-windowed FFT (8192 samples), logarithmic or linear frequency axis with selectable range (20/5/2/1 kHz or automatic from the highest partial), peak/cursor readout, freeze, stored spectrum overlay, spectrogram.
-- Microphone input without speaker monitoring, local audio-file decoding/playback/seek/loop.
+- Microphone input without speaker monitoring, local audio-file decoding and playback with a whole-file overview (click or drag to seek; while paused, waveform and spectrum show the chosen spot).
 - Five bilingual experiments: beats, square-wave synthesis, missing fundamental, phase, vowels. Predict/explore/explain stages.
 - A/B sound comparison (under Sound & sharing) with a blind test (random A or B, charts, A/B buttons and the sound menu hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
 - Tap a peak in the spectrum to solo that wave (synthesizer); spectrogram export as PNG.
