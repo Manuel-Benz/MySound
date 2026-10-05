@@ -249,8 +249,9 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .wave-buttons button{padding:.25rem .5rem}
 .wave-add{flex:0 0 150px;border:1px dashed var(--linie);border-radius:var(--radius-l);color:var(--akzent-text);font-weight:600}
 .source-panel>*{max-width:760px}
-/* Mikrofon-Kasten nur zeigen, wenn die Geräteauswahl gebraucht wird. */
+/* Mikrofon-Kasten: nur die Geräteauswahl, kompakt in einer Zeile. */
 #micControls:not(:has(label:not([hidden]))){display:none}
+#micControls{padding-block:14px}#micControls .stack{flex-direction:row;align-items:center;gap:12px;margin:0}#micControls select{flex:1;min-width:0}
 /* Geführte Experimente: Phase nur dort, wo sie Thema ist. */
 [data-guided=beats] .wave-foot>.wave-row,[data-guided=missing] .wave-foot>.wave-row,[data-guided=harmonics] .wave-foot>.wave-row{display:none}
 @media(max-width:720px){.wave-cards{flex-direction:column;overflow:visible}.wave-card,.wave-add{flex:none}.wave-add{min-height:48px}}
