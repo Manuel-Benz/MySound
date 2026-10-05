@@ -7,13 +7,14 @@ export const SHAPES=['sine','triangle','saw','square'],MAX_WAVES=16,HARMONICS=25
 // Sinus-Teiltönen (Fourier-Koeffizienten, Spitzenwert ≈ 1); die Phase einer Welle verschiebt sie zeitlich,
 // Teilton n also um n·Phase, damit die Form erhalten bleibt.
 export function shapePartials(shape,count=HARMONICS){if(shape==='sine'||!SHAPES.includes(shape))return [{n:1,a:1,p:0}];const out=[];for(let n=1;n<=count;n++){let a=0,p=0;if(shape==='saw')a=2/Math.PI/n;if(shape==='square')a=n%2?4/Math.PI/n:0;if(shape==='triangle'){a=n%2?8/Math.PI**2/(n*n):0;p=n%4===3?180:0;}if(a)out.push({n,a,p});}return out;}
-// Überschwinger (Gibbs) der endlichen Näherungen, damit die Summe nicht übersteuert.
 // Obergrenze der Teiltöne insgesamt: so viele sin() pro Sample verkraften Audio-Thread und Anzeige auch auf Tablets.
+// Bei Überschreitung verlieren alle Formen gemeinsam hohe Teiltöne; Sinuswellen zählen nur einmal.
 export const MAX_PARTIALS=160;
+// Überschwinger (Gibbs) der endlichen Näherungen, damit die Summe nicht übersteuert.
 const PEAK={sine:1,triangle:1,saw:1.18,square:1.18};
 export const makeWave=(f=220,shape='sine',a=1,p=0)=>({shape,f,a,p,mute:false,solo:false});
 // Klingende Wellen mit Teiltönen unter Nyquist; index zeigt auf die Welle im Klang, Phasen in Bogenmass.
-export function activeWaves(s,sampleRate=48000){const solo=s.waves.some(w=>w.solo),live=s.waves.map((w,index)=>({w,index})).filter(({w})=>w.a>0&&!w.mute&&(!solo||w.solo)),count=Math.max(5,Math.min(HARMONICS,Math.floor(MAX_PARTIALS/Math.max(1,live.length))));return live.map(({w,index})=>({index,f:w.f,peak:w.a*PEAK[w.shape],parts:shapePartials(w.shape,count).filter(q=>q.n*w.f<sampleRate/2).map(q=>({n:q.n,a:q.a*w.a,p:(q.p+q.n*w.p)*TAU/360}))})).filter(w=>w.parts.length);}
+export function activeWaves(s,sampleRate=48000){const solo=s.waves.some(w=>w.solo),live=s.waves.map((w,index)=>({w,index})).filter(({w})=>w.a>0&&!w.mute&&(!solo||w.solo)),full=live.map(({w})=>shapePartials(w.shape).filter(q=>q.n*w.f<sampleRate/2)),size=c=>full.reduce((n,p)=>n+p.filter(q=>q.n<=c).length,0);let count=HARMONICS;while(count>1&&size(count)>MAX_PARTIALS)count--;return live.map(({w,index},i)=>({index,f:w.f,peak:w.a*PEAK[w.shape],parts:full[i].filter(q=>q.n<=count).map(q=>({n:q.n,a:q.a*w.a,p:(q.p+q.n*w.p)*TAU/360}))})).filter(w=>w.parts.length);}
 export function activePartials(s,sampleRate=48000){return activeWaves(s,sampleRate).flatMap(w=>w.parts.map(q=>({a:q.a,f:q.n*w.f,p:q.p,wave:w.index})));}
 export function normalization(waves){return 1/Math.max(1,waves.reduce((sum,w)=>sum+w.peak,0));}
 export function generateSamples(s,size,sampleRate=48000,offset=0){const waves=activeWaves(s,sampleRate),norm=normalization(waves),out=new Float32Array(size);for(let i=0;i<size;i++){const time=i/sampleRate+offset;let sum=0;for(const w of waves)for(const q of w.parts)sum+=q.a*Math.sin(q.n*TAU*w.f*time+q.p);out[i]=sum*norm;}return out;}

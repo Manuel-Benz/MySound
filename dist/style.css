@@ -95,7 +95,6 @@ summary{cursor:pointer;font-size:.9rem;font-weight:600;margin-bottom:14px}
 .volume output{min-width:4ch;font-variant-numeric:tabular-nums}
 /* A/B im Menü «Klang & Teilen»: merken | laden je Zeile, Blindtest darunter. */
 .ab-group{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;padding-top:4px;border-top:1px solid var(--linie)}
-.ab-group[hidden]{display:none}
 .menu-label{grid-column:1/-1;font-size:.75rem;font-weight:600;color:var(--text-3);padding:.35rem .7rem 0}
 .ab-group #blindBtn{grid-column:1/-1}
 .status{font-size:.9rem;color:var(--akzent-text);min-height:26px}
@@ -179,7 +178,7 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .saved-empty{margin:0}
 
 /* Blindtest: Arbeitsfläche verborgen, nur Frage und Antworten. */
-.blind .workspace,.blind #actionsMenu,.blind #experimentPanel,.blind .analysis-state,.blind #loadA,.blind #loadB{display:none!important}
+.blind .workspace,.blind #actionsMenu,.blind #experimentPanel,.blind .analysis-state{display:none!important}
 .blind-panel{background:var(--karte);border:1px solid var(--linie);border-radius:var(--radius-l);padding:22px;margin:0 0 18px}
 .blind-question{font-size:1.35rem;font-weight:650;letter-spacing:-.01em;margin:10px 0 14px}
 .blind-question.right{color:var(--gruen)}
@@ -224,7 +223,6 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .wave-shape{flex:1;min-width:0;min-height:34px;padding:.3rem .5rem;font-size:.9rem}
 .wave-remove,.wave-split{flex:none;width:30px;min-height:32px;padding:0;border-color:transparent;color:var(--text-3);font-size:1.25rem}
 .wave-split{font-size:1rem}
-.wave-split[hidden]{display:none}
 .wave-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--text-2)}
 .wave-value{display:flex;align-items:center;gap:5px}
 .wave-value input[type=number]{padding:.25rem .4rem;text-align:right;font-variant-numeric:tabular-nums;border-radius:var(--radius-s);color:var(--text)}
@@ -262,6 +260,4 @@ button.secondary{background:var(--akzent-weich);color:var(--akzent-text);border-
 .chart-panel .panel-heading>:last-child{margin-left:auto}
 .view-switch{display:flex;gap:2px;border:1px solid var(--linie);padding:2px;border-radius:var(--radius)}
 .view-switch button{border-color:transparent;min-height:30px;padding:.2rem .65rem;font-size:.85rem;font-weight:600}
-.view-switch button[aria-pressed=true]{background:var(--akzent-weich);color:var(--akzent-text)}
 .heading-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.heading-tools [hidden]{display:none}
