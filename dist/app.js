@@ -1,11 +1,11 @@
-import {clamp,makeWave,activeWaves,normalization,generateSamples,spectrum,validateSound,wavBuffer,relativeDb,shapePartials,SHAPES,MAX_WAVES,TAU} from './dsp.js?v=39';
-import {messages,experiments} from './i18n.js?v=39';
+import {clamp,makeWave,activeWaves,normalization,generateSamples,spectrum,validateSound,wavBuffer,relativeDb,shapePartials,SHAPES,MAX_WAVES,TAU} from './dsp.js?v=40';
+import {messages,experiments} from './i18n.js?v=40';
 const $=id=>document.getElementById(id);
 const FFT_SIZE=8192;
 const icon=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
 const FULLSCREEN_ENTER=icon('M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5'),FULLSCREEN_EXIT=icon('M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5');
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
-let preferences=read('klang-preferences',{}),lang=preferences.lang==='en'?'en':'de';
+let preferences=read('klang-preferences',{}),urlLang=new URLSearchParams(location.search).get('lang'),lang=urlLang==='en'||urlLang==='de'?urlLang:preferences.lang==='en'?'en':'de'; // ?lang=en|de gibt die Sprache vor (z. B. eingebettet in ein EN-Deck), ohne die gespeicherte Wahl zu ändern
 let sound={waves:[makeWave(220)]};
 let source='synth',view='spectrum',playing=false,frozen=false,comparison=null,ab={},experiment=null,stage='predict',saved=read('klang-sounds',[]);
 if(!Array.isArray(saved))saved=[];
@@ -114,7 +114,7 @@ function splitWave(i){const w=sound.waves[i],all=shapePartials(w.shape).filter(q
 const waveIds=new WeakMap();let nextWaveId=0;const waveId=w=>{if(!waveIds.has(w))waveIds.set(w,nextWaveId++);return waveIds.get(w);};
 function configure(){soundRev++;markWaves();if(worklet&&ctx){const waves=activeWaves(sound,ctx.sampleRate);worklet.port.postMessage({type:'configure',waves:waves.map(({index,f,parts})=>({id:waveId(sound.waves[index]),f,parts})),norm:normalization(waves)});}dirty=true;}
 // resume=false: Kontext nur anlegen (z. B. zum Dekodieren); resume() wartet sonst ohne Klick ewig.
-async function ensureAudio(resume=true){if(audioPromise)await audioPromise;if(!ctx){audioPromise=(async()=>{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error('Web Audio unavailable');ctx=new Audio({latencyHint:'interactive'});analyser=ctx.createAnalyser();analyser.fftSize=FFT_SIZE;analyser.smoothingTimeConstant=0.6;waveAnalyser=ctx.createAnalyser();waveAnalyser.fftSize=32768;master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);await ctx.audioWorklet.addModule('./synth-worklet.js?v=39');worklet=new AudioWorkletNode(ctx,'additive-synth',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[1]});configure();waveHistory=new Float32Array(ctx.sampleRate);lastAudioTime=ctx.currentTime;ctx.onstatechange=()=>{if(ctx.state==='suspended'&&playing){playing=false;updateButtons();}};})();try{await audioPromise;}catch(e){if(ctx)await ctx.close().catch(()=>{});ctx=null;throw e;}finally{audioPromise=null;}}if(resume)await ctx.resume();}
+async function ensureAudio(resume=true){if(audioPromise)await audioPromise;if(!ctx){audioPromise=(async()=>{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error('Web Audio unavailable');ctx=new Audio({latencyHint:'interactive'});analyser=ctx.createAnalyser();analyser.fftSize=FFT_SIZE;analyser.smoothingTimeConstant=0.6;waveAnalyser=ctx.createAnalyser();waveAnalyser.fftSize=32768;master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);await ctx.audioWorklet.addModule('./synth-worklet.js?v=40');worklet=new AudioWorkletNode(ctx,'additive-synth',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[1]});configure();waveHistory=new Float32Array(ctx.sampleRate);lastAudioTime=ctx.currentTime;ctx.onstatechange=()=>{if(ctx.state==='suspended'&&playing){playing=false;updateButtons();}};})();try{await audioPromise;}catch(e){if(ctx)await ctx.close().catch(()=>{});ctx=null;throw e;}finally{audioPromise=null;}}if(resume)await ctx.resume();}
 function setVolume(value){if(master&&ctx){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setTargetAtTime(value,ctx.currentTime,.018);}}
 // Position in Sekunden: Startstelle plus die seit dem Start verstrichene Zeit, solange die Datei läuft.
 function filePosition(){return Math.min(fileOffset+(fileNode?ctx.currentTime-fileStarted:0),fileBuffer.duration);}

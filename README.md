@@ -27,7 +27,7 @@ Stage layout: source tabs, play button and volume share one bar; the waves sit i
 - A/B sound comparison (under Sound & sharing) with a blind test (random A or B, charts, A/B buttons and the sound menu hidden, score), saved sounds as a list with waveform preview and delete, hash-based sharing, 3-second PCM WAV export.
 - Tap a peak in the spectrum to solo that wave (synthesizer); spectrogram export as PNG.
 - On phones the playback bar is fixed at the bottom.
-- Saved DE/EN preference, appearance (system/light/dark), colour scheme and accent tone, responsive layout, offline service worker and web app manifest.
+- Saved DE/EN preference (`?lang=en` or `?lang=de` sets the language for that visit without changing the saved choice, e.g. when embedded in an English slide deck; embedded, arrow keys outside fields and PageUp/PageDown are passed to the parent page via `postMessage`), appearance (system/light/dark), colour scheme and accent tone, responsive layout, offline service worker and web app manifest.
 - Optional browser WebMCP read/configure tools (never start sound or recording).
 
 ## Measurement conventions
